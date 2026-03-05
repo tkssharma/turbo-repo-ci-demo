@@ -1,0 +1,14 @@
+{
+  "name": "@demo/api",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "echo 'Building API...' && mkdir -p dist && cp -r src/* dist/",
+    "lint": "echo 'Linting API...'",
+    "deploy": "node scripts/deploy.js"
+  },
+  "dependencies": {
+    "@demo/shared": "workspace:*"
+  }
+}

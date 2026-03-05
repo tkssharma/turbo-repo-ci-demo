@@ -1,0 +1,62 @@
+name: Turborepo Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  # Option 1: Deploy all affected apps
+  deploy-affected:
+    name: Deploy Affected Apps
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Need full history for affected detection
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - run: pnpm install
+
+      # Show what's affected (for demo purposes)
+      - name: Show Affected Packages
+        run: pnpm turbo run build --filter=...[origin/main] --dry-run
+
+      # Deploy only apps that changed since origin/main
+      - name: Deploy Affected
+        run: pnpm turbo run deploy --filter=...[origin/main]
+
+  # Option 2: Matrix deployment per app
+  deploy-matrix:
+    name: Deploy ${{ matrix.app }}
+    runs-on: ubuntu-latest
+    if: false # Disabled - enable if you prefer matrix approach
+    strategy:
+      matrix:
+        app: [web, api, admin]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Deploy ${{ matrix.app }}
+        run: pnpm turbo run deploy --filter=${{ matrix.app }}

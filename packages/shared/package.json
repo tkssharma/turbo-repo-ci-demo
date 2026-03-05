@@ -1,0 +1,10 @@
+{
+  "name": "@demo/shared",
+  "version": "1.0.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "build": "echo 'Building shared package...'",
+    "lint": "echo 'Linting shared package...'"
+  }
+}

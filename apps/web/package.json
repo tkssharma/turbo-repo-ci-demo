@@ -1,0 +1,14 @@
+{
+  "name": "@demo/web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "echo 'Building web app...' && mkdir -p dist && cp -r src/* dist/",
+    "lint": "echo 'Linting web app...'",
+    "deploy": "node scripts/deploy.js"
+  },
+  "dependencies": {
+    "@demo/shared": "workspace:*"
+  }
+}

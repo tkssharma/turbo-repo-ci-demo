@@ -1,0 +1,14 @@
+{
+  "name": "@demo/admin",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node src/index.js",
+    "build": "echo 'Building admin app...' && mkdir -p dist && cp -r src/* dist/",
+    "lint": "echo 'Linting admin app...'",
+    "deploy": "node scripts/deploy.js"
+  },
+  "dependencies": {
+    "@demo/shared": "workspace:*"
+  }
+}
