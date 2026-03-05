@@ -28,11 +28,11 @@ jobs:
 
       # Show what's affected (for demo purposes)
       - name: Show Affected Packages
-        run: pnpm turbo run build --filter=...[${{ github.event.before }}] --dry-run
+        run: pnpm turbo run build --filter="./apps/*...[${{ github.event.before }}]" --dry-run
 
       # Deploy only apps that changed since the previous commit
       - name: Deploy Affected
-        run: pnpm turbo run deploy --filter=...[${{ github.event.before }}]
+        run: pnpm turbo run deploy --filter="./apps/*...[${{ github.event.before }}]"
 
   # Option 2: Matrix deployment per app
   deploy-matrix:
