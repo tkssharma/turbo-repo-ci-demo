@@ -2,9 +2,9 @@ name: Turborepo Deploy
 
 on:
   push:
-    branches: [main]
+    branches: [develop]
   pull_request:
-    branches: [main]
+    branches: [develop]
 
 jobs:
   # Option 1: Deploy all affected apps
@@ -29,11 +29,11 @@ jobs:
 
       # Show what's affected (for demo purposes)
       - name: Show Affected Packages
-        run: pnpm turbo run build --filter=...[origin/main] --dry-run
+        run: pnpm turbo run build --filter=...[origin/develop] --dry-run
 
       # Deploy only apps that changed since origin/main
       - name: Deploy Affected
-        run: pnpm turbo run deploy --filter=...[origin/main]
+        run: pnpm turbo run deploy --filter=...[origin/develop]
 
   # Option 2: Matrix deployment per app
   deploy-matrix:
